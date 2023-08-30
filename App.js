@@ -57,7 +57,9 @@ const Nisbi = () => {
     return nilai > 85 ? 'Sangat Baik (A)' :
       nilai > 70 ? 'Baik (B)' :
         nilai > 55 ? 'Cukup (C)' :
-          'Kurang (D)'};
+          'Kurang (D)'
+  };
+  
   return (
     <View>
       <Text>Skor anda: {nilai} dengan predikat {predikat(nilai)}</Text>
