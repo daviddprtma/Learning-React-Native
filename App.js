@@ -15,6 +15,9 @@ export default function App() {
       <Pet type="dog"/>
       <Pet type="duck"/>
     <Nisbi></Nisbi>
+    <Kotak></Kotak>
+    &nbsp;
+    <RgbKotak></RgbKotak>
     </View>
   );
 }
@@ -65,6 +68,67 @@ const Nisbi = () => {
       <Text>Skor anda: {nilai} dengan predikat {predikat(nilai)}</Text>
       <Button title='nilai+5' onPress={()=>setNilai(nilai+5)}></Button>
       <Button title='nilai-5' onPress={()=>setNilai(nilai-5)}></Button>
+    </View>
+  );
+}
+
+const Kotak = () => {
+  const [kotak,setAction] = useState(0);
+  const buatKotakBesar = () => {
+    setAction(kotak + 20);
+  };
+
+  return (
+    <View>
+      <Text style={{fontSize: 50, backgroundColor: 'rgb(255,0,0)', width:kotak, height: kotak}}>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </Text> 
+      &nbsp;
+      <Button title='kotak Besar' onPress={()=>buatKotakBesar()}></Button>
+    </View>
+  );
+}
+
+const RgbKotak = () => {
+  const [boxSize, setBoxSize] = useState(100);
+  const [redValue, setRedValue] = useState(0);
+  const [greenValue, setGreenValue] = useState(0);
+  const [blueValue, setBlueValue] = useState(0);
+
+  const increaseBoxSize = () => {
+    const newSize = boxSize + 20;
+    setBoxSize(newSize); 
+  };
+
+  const updateColor = (channel, increment) => {
+    if (channel === 'red') {
+      setRedValue(Math.min(255, Math.max(0, redValue + increment)));
+    } else if (channel === 'green') {
+      setGreenValue(Math.min(255, Math.max(0, greenValue + increment)));
+    } else if (channel === 'blue') {
+      setBlueValue(Math.min(255, Math.max(0, blueValue + increment)));
+    }
+  }
+  return(
+    
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        style={{
+          width: boxSize,
+          height: boxSize,
+          backgroundColor: `rgb(${redValue},${greenValue},${blueValue})`,
+          marginBottom: 20,
+        }}
+      />
+      <View style={{ flexDirection: 'row' }}>
+        <Button title="R+" onPress={() => updateColor('red', 10)} />
+        <Button title="R-" onPress={() => updateColor('red', -10)} />
+        <Button title="G+" onPress={() => updateColor('green', 10)} />
+        <Button title="G-" onPress={() => updateColor('green', -10)} />
+        <Button title="B+" onPress={() => updateColor('blue', 10)} />
+        <Button title="B-" onPress={() => updateColor('blue', -10)} />
+      </View>
+      <Button title="Besarkan Kotak" onPress={increaseBoxSize} />
     </View>
   );
 }
